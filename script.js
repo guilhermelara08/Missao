@@ -1,4 +1,4 @@
-import { aleatorio, nome } from './aleatorio.js';
+import { aleatorio, obterNome } from './aleatorio.js'; // Use obterNome para pegar um novo nome a cada vez
 import { perguntas } from './perguntas.js';
 
 const caixaPrincipal = document.querySelector(".caixa-principal");
@@ -63,7 +63,7 @@ function respostaSelecionada(opcaoSelecionada) {
 
 // Mostra o resultado final
 function mostraResultado() {
-    caixaPerguntas.textContent = `Em 2049, ${nome}`;
+    caixaPerguntas.textContent = `Em 2049, ${obterNome()}`; // Use obterNome para um novo nome
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
     caixaResultado.classList.add("mostrar");
@@ -74,4 +74,15 @@ botaoJogarNovamente.addEventListener("click", jogaNovamente);
 
 function jogaNovamente() {
     atual = 0;
-    h
+    historiaFinal = "";
+    caixaResultado.classList.remove("mostrar");
+    caixaAlternativas.textContent = ""; // Limpa alternativas anteriores
+    mostraPergunta();
+}
+
+// Substitui "você" pelo nome nas perguntas
+function substituiNome() {
+    for (const pergunta of perguntas) {
+        pergunta.enunciado = pergunta.enunciado.replace(/você/g, obterNome());
+    }
+}
