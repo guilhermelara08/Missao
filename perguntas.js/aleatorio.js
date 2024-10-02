@@ -2,6 +2,9 @@ const nomes = ["Fernanda", "Giuliana", "Maria Eduarda", "Marcelo", "Amanda", "Gu
 
 // Função para retornar um nome aleatório da lista
 export function aleatorio(lista) {
+    if (lista.length === 0) {
+        throw new Error("A lista não pode estar vazia.");
+    }
     const posicao = Math.floor(Math.random() * lista.length);
     return lista[posicao];
 }
@@ -10,3 +13,4 @@ export function aleatorio(lista) {
 export function obterNome() {
     return aleatorio(nomes);
 }
+
